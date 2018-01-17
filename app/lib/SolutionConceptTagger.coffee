@@ -1,10 +1,14 @@
 concepts = require 'schemas/concepts'
 
-module.exports = TagSolution = (solution) ->
-  code = solution.source
+module.exports = TagSolution = ({source, ast, language}) ->
   engine = new esper.Engine()
-  engine.load(code)
+  if source
+    engine.load(source)
+  else if ast
+    engine.loadAST(ast)
   ast = engine.evaluator.ast
+  if language is 'python'
+    ast.body.shift() # remove the first variable assignment
   result = []
   for key of concepts
     tkn = concepts[key].tagger
@@ -13,6 +17,4 @@ module.exports = TagSolution = (solution) ->
       result.push concepts[key].concept if tkn(ast)
     else
       result.push concepts[key].concept if ast.find(tkn).length > 0
-   
-  console.log result
   result
