@@ -22,6 +22,9 @@ flat-layout
               span.level-name.pull-left
                 span(v-if="level.primaryConcepts")
                   | {{ $t('concepts.' + (level.primaryConcepts && level.primaryConcepts[0])) }} ({{ level.name }})
+                span(v-else-if="level.assessment === 'open-ended'")
+                  | Course ({{ level.name }})
+                // TODO: i18n
                 span(v-else)
                   | ({{ level.name }})
             .col-xs-3

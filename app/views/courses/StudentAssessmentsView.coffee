@@ -32,7 +32,7 @@ StudentAssessmentsComponent = Vue.extend
       # TODO: Only load the levels we actually need
       api.classrooms.get({ @classroomID }, { data: {memberID: me.id}, cache: false }).then((@classroom) =>
         @allLevels = _.flatten(_.map(@classroom.courses, (course) => course.levels))
-        @levels = _.flatten(_.map(@classroom.courses, (course) => _.filter(course.levels, { assessment: true })))
+        @levels = _.flatten(_.map(@classroom.courses, (course) => _.filter(course.levels, 'assessment')))
         @courses = @classroom.courses
       ).then(=>
         _.forEach(@levels, (level) =>
