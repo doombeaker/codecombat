@@ -543,8 +543,11 @@ mixin assessmentsTab
           thead
             th
             each level in levels
-              - var concept = level.get('primaryConcepts') && level.get('primaryConcepts')[0]
-              th(data-i18n="concepts." + concept)
+              if level.get('assessment') === 'open-ended'
+                th(data-i18n="TODO") Course
+              else
+                - var concept = level.get('primaryConcepts') && level.get('primaryConcepts')[0]
+                th(data-i18n="concepts." + concept)
           tbody
             each student in state.get('students').models
               tr
