@@ -1268,13 +1268,15 @@ module.exports = class CampaignView extends RootView
           level.locked = found
           level.hidden = false
 
+      level.noFlag = !level.next
       if level.locked
         level.color = 'rgb(193, 193, 193)'
       else if level.practice
         level.color = 'rgb(45, 145, 81)'
       else if level.assessment
         level.color = 'rgb(196, 29, 176)'
-      level.noFlag = !level.next
+        if playerState isnt 'complete'
+          level.noFlag = false
       level.unlocksHero = false
       level.unlocksItem = false
       prev = level
