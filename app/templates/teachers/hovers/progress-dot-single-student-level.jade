@@ -6,6 +6,21 @@ mixin timePlayed()
     .small-details.nowrap
       span.spr(data-i18n='teacher.time_played')
       span= moment.duration({ seconds: session.get('playtime') }).humanize()
+    
+mixin assessmentLines()
+  if assessment === 'open-ended'
+    .small-details.nowrap
+      span(data-i18n="teacher.concepts_used")
+    .small-details.nowrap
+      for concept, i in codeConcepts
+        if i > 0
+          =", "
+        span(data-i18n="concepts." + concept)
+  else
+    .small-details.nowrap
+      span(data-i18n="teacher.concept_checked")
+    .small-details.nowrap
+      span(data-i18n="concepts." + primaryConcept)
 
 if completed
   .small-details.nowrap
@@ -19,6 +34,8 @@ if completed
     if dateCompleted
       span= new Date(dateCompleted).toLocaleString()
     +timePlayed
+  if assessment
+    +assessmentLines
   if !isProject && !isLadder
     .small-details.nowrap
       //- TODO: data-i18n doesn't work here
@@ -30,9 +47,12 @@ else if started
       span.spr . 
     span= levelName
   .small-details.nowrap
-    span.spr(data-i18n='teacher.last_played')
+    span.spr(data-i18n='user.last_played')
     span= new Date(session.get('changed')).toLocaleString()
     +timePlayed
+  if assessment
+    +assessmentLines
+        
   if !isProject && !isLadder
     .small-details.nowrap
       strong Click to view student code

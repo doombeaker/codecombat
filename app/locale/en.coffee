@@ -1505,6 +1505,8 @@
     latest_completed: "Latest completed:"
     sort_by: "Sort by"
     progress: "Progress"
+    concepts_used: "Concepts Used:"
+    concept_checked: "Concept Checked:"
     completed: "Completed"
     practice: "Practice"
     started: "Started"

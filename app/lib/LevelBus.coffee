@@ -257,6 +257,7 @@ module.exports = class LevelBus extends Bus
     return unless @session.get('codeLanguage') in ['javascript', 'python']
     try
       tags = tagger({ast: @session.lastAST, language: @session.get('codeLanguage')})
+      tags = _.without(tags, 'basic_syntax')
       @session.save('codeConcepts', tags)
       @changedSessionProperties.conceptsUsed = true
     catch e

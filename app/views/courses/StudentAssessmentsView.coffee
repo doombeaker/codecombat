@@ -63,7 +63,7 @@ StudentAssessmentsComponent = Vue.extend
         course = _.find(@courses, (c) =>
           Boolean(_.find(c.levels, (l) => l.original is level.original))
         )
-        courseInstance = _.find(@courseInstances, (ci) => ci.courseID is course._id)
+        courseInstance = _.find(@courseInstances, (ci) => ci.courseID is course._id and ci.classroomID is @classroomID)
         if _.all([level.slug, courseInstance?._id, course?._id])
           map[level.original] = "/play/level/#{level.slug}?course-instance=#{courseInstance?._id}&course=#{course?._id}"
         return map

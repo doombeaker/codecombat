@@ -427,7 +427,7 @@ mixin studentLevelProgressDot(progress, level, levelNumber, student)
   //- TODO: Refactor with TeacherClassesView jade
   - dotClass = progress.completed ? 'forest' : (progress.started ? 'gold' : '');
   - levelName = i18n(level.attributes, 'name')
-  - context = _.merge(progress, { levelName: levelName, levelNumber: levelNumber, moment: moment, practice: level.get('practice'), isLadder: level.isLadder(), isProject: level.isProject() })
+  - context = _.merge(progress, { levelName: levelName, levelNumber: levelNumber, moment: moment, practice: level.get('practice'), isLadder: level.isLadder(), isProject: level.isProject(), assessment: level.get('assessment'), primaryConcept: _.first(level.get('primaryConcepts')) })
   - var link = null;
   if dotClass
     //- TODO: these anchor links do not navigate to the anchor in destination page

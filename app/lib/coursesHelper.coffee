@@ -191,6 +191,7 @@ module.exports =
               dates = _.map(sessions, (s) -> new Date(s.get('changed')))
               courseProgress[levelID][userID].lastPlayed = new Date(Math.max(dates...))
               courseProgress[levelID].numStarted += 1
+              courseProgress[levelID][userID].codeConcepts = _.flatten(_.map(sessions, (s) -> s.get('codeConcepts') or []))
 
             if _.find(sessions, (s) -> s.completed()) # have finished this level
               courseProgress.completed &&= true unless isPractice #no-op
