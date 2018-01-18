@@ -258,8 +258,8 @@ module.exports = class LevelBus extends Bus
     try
       tags = tagger({ast: @session.lastAST, language: @session.get('codeLanguage')})
       tags = _.without(tags, 'basic_syntax')
-      @session.save('codeConcepts', tags)
-      @changedSessionProperties.conceptsUsed = true
+      @session.set('codeConcepts', tags)
+      @changedSessionProperties.codeConcepts = true
     catch e
       # Just in case the concept tagger system breaks. Esper needed fixing to handle
       # the Python skulpt AST, the concept tagger is not fully tested, and this is a
