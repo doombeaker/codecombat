@@ -1,7 +1,7 @@
-extends /templates/base
+extends /templates/base.jade
 
-// User pages might have some user page specific header, if not remove this
 block content
+  // User pages might have some user page specific header, if not remove this
   .clearfix
     if view.userData && view.viewName
       ol.breadcrumb

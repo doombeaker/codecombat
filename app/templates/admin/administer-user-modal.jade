@@ -1,8 +1,7 @@
-extends /templates/core/modal-base-flat
-
-// DNT
+extends /templates/core/modal-base-flat.jade
 
 block modal-header-content
+  // DNT
 
   h4 Name: #{view.user.get('name')} (#{view.user.get('firstName')} #{view.user.get('lastName')})
   h4 Email: #{view.user.get('emailLower') || view.user.get('email')}

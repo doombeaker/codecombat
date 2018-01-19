@@ -53,8 +53,8 @@ module.exports = (env) => {
         { test: /\.coffee$/, use: [
           { loader: 'coffee-loader' },
         ] },
-        { test: /\.jade$/, use: { loader: 'jade-loader', options: { root: path.resolve('./app') } } },
-        { test: /\.pug$/, use: { loader: 'jade-loader', options: { root: path.resolve('./app') } } },
+        { test: /\.jade$/, use: { loader: 'pug-loader', options: { root: path.resolve('./app') } } },
+        { test: /\.pug$/, use: { loader: 'pug-loader', options: { root: path.resolve('./app') } } },
         {
           oneOf: [
             { test: /jquery-ui.*css$/, use: [ // So we can ignore the images it references that we are missing
@@ -113,6 +113,18 @@ module.exports = (env) => {
       new webpack.IgnorePlugin(/\/fonts\/bootstrap\/.*$/), // Ignore Bootstrap's fonts
       new webpack.IgnorePlugin(/^memwatch$/), // Just used by the headless client on the server side
       new webpack.IgnorePlugin(/.DS_Store$/),
+
+      // new webpack.IgnorePlugin(/\!locale/),
+      // new webpack.IgnorePlugin(/\/admin\//),
+      // new webpack.IgnorePlugin(/\/artisan\//),
+      // new webpack.IgnorePlugin(/\/clans\//),
+      // new webpack.IgnorePlugin(/\/contribute\//),
+      // new webpack.IgnorePlugin(/\/courses\//),
+      // new webpack.IgnorePlugin(/\/editor\//),
+      // new webpack.IgnorePlugin(/\/ladder\//),
+      // new webpack.IgnorePlugin(/\/teachers\//),
+      // new webpack.IgnorePlugin(/\/play\//),
+      
       new CopyWebpackPlugin([
         // NOTE: If you add a static asset, consider updating ViewLoadTimer to track its loading.
         { // Static assets
