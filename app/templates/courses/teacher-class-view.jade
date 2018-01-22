@@ -545,7 +545,10 @@ mixin assessmentsTab
             th
             each level in levels
               if level.get('assessment') === 'open-ended'
-                th(data-i18n="TODO") Course
+                if level.get('assessmentPlacement') === 'middle'
+                  th(data-i18n="teacher.mid_course")
+                else
+                  th(data-i18n="teacher.end_course")
               else
                 - var concept = level.get('primaryConcepts') && level.get('primaryConcepts')[0]
                 th(data-i18n="concepts." + concept)
