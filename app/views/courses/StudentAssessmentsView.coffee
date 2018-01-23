@@ -20,6 +20,7 @@ StudentAssessmentsComponent = Vue.extend
     levelSessions: []
     classroom: null
     levels: null
+    levelsByCourse: null
     sessionMap: {}
     playLevelUrlMap: {}
     levelUnlockedMap: {}
@@ -30,17 +31,24 @@ StudentAssessmentsComponent = Vue.extend
     Promise.all([
       api.users.getCourseInstances({ userID: me.id }).then((@courseInstances) =>)
       # TODO: Only load the levels we actually need
-      api.classrooms.get({ @classroomID }, { data: {memberID: me.id}, cache: false }).then((@classroom) =>
+      Promise.all([
+        api.courses.getAll().then((@courses) =>),
+        api.classrooms.get({ @classroomID }, { data: {memberID: me.id}, cache: false }).then((@classroom) =>)
+      ]).then(=>
         @allLevels = _.flatten(_.map(@classroom.courses, (course) => course.levels))
         @levels = _.flatten(_.map(@classroom.courses, (course) => _.filter(course.levels, 'assessment')))
+        @levelsByCourse = _.map(@classroom.courses, (course) => { 
+          course: _.find(@courses, ({_id: course._id})),
+          assessmentLevels: _.filter(course.levels, 'assessment')
+        })
         @courses = @classroom.courses
-      ).then(=>
         _.forEach(@levels, (level) =>
           api.levels.getByOriginal(level.original, {
-            data: { project: 'slug,name,original,primaryConcepts' }
+            data: { project: 'slug,name,original,primaryConcepts,i18n' }
           }).then (data) =>
             levelToUpdate = _.find(@levels, {original: data.original})
             Vue.set(levelToUpdate, 'primaryConcepts', data.primaryConcepts)
+            Vue.set(levelToUpdate, 'i18n', data.i18n)
         )
       )
       api.users.getLevelSessions({ userID: me.id }).then((@levelSessions) =>)

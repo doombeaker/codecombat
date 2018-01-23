@@ -1445,6 +1445,8 @@
     challenge_level: "Challenge Level:"
     status: "Status:"
     assessments: "Assessments"
+    challenges: "Challenges"
+    level_name: "Level Name:"
     play_again: "Play Again"
     keep_trying: "Keep Trying"
     start_challenge: "Start Challenge"

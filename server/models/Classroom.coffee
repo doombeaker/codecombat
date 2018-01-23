@@ -79,6 +79,7 @@ ClassroomSchema.methods.generateCoursesData = co.wrap ({isAdmin, includeAssessme
         'slug',
         'name',
         'assessment',
+        'assessmentPlacement'
         'practice',
         'practiceThresholdMinutes',
         'primerLanguage',
