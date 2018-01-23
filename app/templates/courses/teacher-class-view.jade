@@ -363,6 +363,7 @@ mixin courseOverview(course)
     .course-overview-progress
       if state.get('progressData')
         each level, index in levels
+          - if (level.get('assessment')) continue;
           - var progress = state.get('progressData').get({ classroom: view.classroom, course: course, level: level })
           - var levelNumber = view.classroom.getLevelNumber(level.get('original'), index + 1)
           +allStudentsLevelProgressDot(progress, level, levelNumber)
@@ -377,6 +378,7 @@ mixin studentLevelsRow(student)
       - var levels = view.classroom.getLevels({courseID: course.id}).models
       if state.get('progressData')
         each level, index in levels
+          - if (level.get('assessment')) continue;
           - var progress = state.get('progressData').get({ classroom: view.classroom, course: course, level: level, user: student })
           - var levelNumber = view.classroom.getLevelNumber(level.get('original'), index + 1)
           +studentLevelProgressDot(progress, level, levelNumber, student)

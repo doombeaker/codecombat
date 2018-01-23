@@ -52,7 +52,7 @@ module.exports = class Classroom extends CocoModel
         levels = []
         for level in course.levels when level.original
           continue if language? and level.primerLanguage is language
-          levels.push({key: level.original, practice: level.practice ? false})
+          levels.push({key: level.original, practice: level.practice ? false, assessment: level.assessment ? false})
         _.assign(@levelNumberMap, utils.createLevelNumberMap(levels))
     @levelNumberMap[levelID] ? defaultNumber
 
