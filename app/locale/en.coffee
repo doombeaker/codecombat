@@ -1745,6 +1745,7 @@
     not_started: "Not Started"
     mid_course: "Mid-Course"
     end_course: "End of Course"
+    none: "None"
 
   share_licenses:
     share_licenses: "Share Licenses"

@@ -16,6 +16,8 @@ mixin assessmentLines()
         if i > 0
           =", "
         span(data-i18n="concepts." + concept)
+      if !codeConcepts.length
+        span(data-i18n="teacher.none")
   else
     .small-details.nowrap
       span(data-i18n="teacher.concept_checked")
